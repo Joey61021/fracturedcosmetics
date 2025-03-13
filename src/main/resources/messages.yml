@@ -1,0 +1,15 @@
+general:
+  messages:
+    no_console: '&cSorry, but you cannot use this command via console.'
+    no_permission: '&cSorry, but you do not have permission to perform this command.'
+    no_player: '&cSorry, but we could not find this player in your current server.'
+    invalid_args: "&cMissing arguments or incorrect command usage."
+commands:
+  cosmetics:
+    usage: "&cUsage:\n- /cosmetics [type]"
+    invalid_type: "&cThis is not a valid cosmetic type, please use: %cosmetics%"
+  projectile_trail:
+    usage: "&cUsage:\n- /cosmetics [type]"
+    invalid_type: "&cThis is not a valid projectile trail, please use: %tails%"
+    already_selected: "&cThis projectile trail is already selected!"
+    selected: "&aYou have selected the %trail% projectile trail!"

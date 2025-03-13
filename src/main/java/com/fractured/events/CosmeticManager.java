@@ -71,10 +71,12 @@ public class CosmeticManager implements Listener
         Player player = (Player) event.getWhoClicked();
         ItemStack item = event.getCurrentItem();
 
-        if (inv == null || item == null || !item.getType().equals(Material.AIR) || !event.getView().getTitle().equalsIgnoreCase("Projectile Trails"))
+        if (inv == null || item == null || item.getType().equals(Material.AIR) || !event.getView().getTitle().equalsIgnoreCase("Projectile Trails"))
         {
             return;
         }
+
+        event.setCancelled(true);
 
         for (ProjectileTrail trails : ProjectileTrail.values())
         {

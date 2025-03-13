@@ -10,7 +10,7 @@ public enum ProjectileTrail
     ANGRY_VILLAGER(ChatColor.GREEN, "Angry Villager", Material.VILLAGER_SPAWN_EGG, Particle.ANGRY_VILLAGER),
     FLAME(ChatColor.GOLD, "Flame", Material.LAVA_BUCKET, Particle.FLAME),
     MUSIC_NOTE(ChatColor.DARK_PURPLE, "Music Note", Material.NOTE_BLOCK, Particle.NOTE),
-    CRIT(ChatColor.LIGHT_PURPLE, "Crit", Material.IRON_SWORD, Particle.CRIT);
+    EXPLOSION(ChatColor.RED, "Explosion", Material.IRON_SWORD, Particle.EXPLOSION);
 
     private final String display;
     private final ChatColor color;

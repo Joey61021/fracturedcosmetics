@@ -1,6 +1,7 @@
 package com.fractured;
 
 import com.fractured.commands.CosmeticsCommand;
+import com.fractured.commands.HitEffectCommand;
 import com.fractured.commands.ProjectileTrailCommand;
 import com.fractured.config.Config;
 import com.fractured.events.CosmeticManager;
@@ -49,6 +50,7 @@ public class FracturedCore extends JavaPlugin
     {
         getCommand("cosmetics").setExecutor(CosmeticsCommand::cosmetics);
         getCommand("projectiletrail").setExecutor(ProjectileTrailCommand::projectileTrail);
+        getCommand("hiteffect").setExecutor(HitEffectCommand::hitEffect);
     }
 
     void registerListeners()

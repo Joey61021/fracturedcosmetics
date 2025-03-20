@@ -18,8 +18,11 @@ public final class Messages
     public static final TextConfigKey COMMAND_COSMETICS_USAGE = textKey("commands.cosmetics.usage");
     public static final TextConfigKey COMMAND_COSMETICS_INVALID_TYPE = textKey("commands.cosmetics.invalid_type");
 
-    public static final TextConfigKey COMMAND_PROJECTILE_TRAIL_USAGE = textKey("commands.projectile_trail.usage");
     public static final TextConfigKey COMMAND_PROJECTILE_TRAIL_INVALID_TYPE = textKey("commands.projectile_trail.invalid_type");
     public static final TextConfigKey COMMAND_PROJECTILE_TRAIL_ALREADY_SELECTED = textKey("commands.projectile_trail.already_selected");
     public static final TextConfigKey COMMAND_PROJECTILE_TRAIL_SELECTED = textKey("commands.projectile_trail.selected");
+
+    public static final TextConfigKey COMMAND_HIT_EFFECT_INVALID_TYPE = textKey("commands.hit_effect.invalid_type");
+    public static final TextConfigKey COMMAND_HIT_EFFECT_ALREADY_SELECTED = textKey("commands.hit_effect.already_selected");
+    public static final TextConfigKey COMMAND_HIT_EFFECT_SELECTED = textKey("commands.hit_effect.selected");
 }

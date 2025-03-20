@@ -1,18 +1,21 @@
 package com.fractured.events;
 
 import com.fractured.FracturedCore;
+import com.fractured.enums.HitEffect;
 import com.fractured.enums.ProjectileTrail;
 import com.fractured.user.User;
 import com.fractured.user.UserManager;
 import com.fractured.util.Utils;
 import com.fractured.util.globals.Messages;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -45,6 +48,27 @@ public class CosmeticManager implements Listener
         player.openInventory(inventory);
     }
 
+    public static void openHitEffectGUI(Player player)
+    {
+        Inventory inventory = Bukkit.createInventory(null, 6 * 9, "Hit Effects");
+
+        for (HitEffect hitEffects : HitEffect.values())
+        {
+            ItemStack item = new ItemStack(hitEffects.getMaterial());
+            ItemMeta meta = item.getItemMeta();
+
+            if (meta != null)
+            {
+                meta.setDisplayName(hitEffects.getColor() + hitEffects.getDisplay());
+                item.setItemMeta(meta);
+            }
+
+            inventory.addItem(item);
+        }
+
+        player.openInventory(inventory);
+    }
+
     public static void applyProjectileTrail(Player player, ProjectileTrail projectileTrail)
     {
         User user = UserManager.getUser(player);
@@ -62,6 +86,25 @@ public class CosmeticManager implements Listener
         user.setProjectileTrail(projectileTrail);
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0F, 1.0F);
         player.sendMessage(FracturedCore.getMessages().get(Messages.COMMAND_PROJECTILE_TRAIL_SELECTED).replace("%trail%", projectileTrail.getDisplay()));
+    }
+
+    public static void applyHitEffect(Player player, HitEffect hitEffect)
+    {
+        User user = UserManager.getUser(player);
+        if (user == null)
+        {
+            return;
+        }
+
+        if (user.getHitEffect() != null && user.getHitEffect().equals(hitEffect))
+        {
+            player.sendMessage(FracturedCore.getMessages().get(Messages.COMMAND_HIT_EFFECT_ALREADY_SELECTED));
+            return;
+        }
+
+        user.setHitEffect(hitEffect);
+        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1.0F, 1.0F);
+        player.sendMessage(FracturedCore.getMessages().get(Messages.COMMAND_HIT_EFFECT_SELECTED).replace("%effect%", hitEffect.getDisplay()));
     }
 
     @EventHandler
@@ -85,6 +128,26 @@ public class CosmeticManager implements Listener
                 applyProjectileTrail(player, trails);
                 return;
             }
+        }
+    }
+
+    @EventHandler
+    public static void onHit(EntityDamageByEntityEvent event)
+    {
+        if (!(event.getDamager() instanceof Player) || !(event.getEntity() instanceof Player victim))
+        {
+            return;
+        }
+
+        User user = UserManager.getUser(victim);
+        if (user == null)
+        {
+            return; // why
+        }
+
+        if (user.getHitEffect() == HitEffect.BLOOD)
+        {
+            victim.getWorld().playEffect(victim.getLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
         }
     }
 

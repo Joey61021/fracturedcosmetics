@@ -9,7 +9,10 @@ commands:
     usage: "&cUsage:\n- /cosmetics [type]"
     invalid_type: "&cThis is not a valid cosmetic type, please use: %cosmetics%"
   projectile_trail:
-    usage: "&cUsage:\n- /cosmetics [type]"
     invalid_type: "&cThis is not a valid projectile trail, please use: %tails%"
     already_selected: "&cThis projectile trail is already selected!"
     selected: "&aYou have selected the %trail% projectile trail!"
+  hit_effect:
+    invalid_type: "&cThis is not a valid hit effect, please use: %effects%"
+    already_selected: "&cThis hit effect is already selected!"
+    selected: "&aYou have selected the %effect% hit effect!"

@@ -5,9 +5,9 @@ import com.fractured.enums.HitEffect;
 import com.fractured.enums.ProjectileTrail;
 import com.fractured.user.User;
 import com.fractured.user.UserManager;
+import com.fractured.util.Menu;
 import com.fractured.util.Utils;
 import com.fractured.util.globals.Messages;
-import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -24,12 +24,19 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 public class CosmeticManager implements Listener
 {
 
-    public static void openProjectileTrailGUI(Player player)
+    public static Set<Menu> menus = new HashSet<>();
+
+    static
     {
-        Inventory inventory = Bukkit.createInventory(null, 6 * 9, "Projectile Trails");
+        /* Projectile trails */
+        ArrayList<ItemStack> items = new ArrayList<>();
 
         for (ProjectileTrail trails : ProjectileTrail.values())
         {
@@ -42,15 +49,13 @@ public class CosmeticManager implements Listener
                 item.setItemMeta(meta);
             }
 
-            inventory.addItem(item);
+            items.add(item);
         }
 
-        player.openInventory(inventory);
-    }
+        menus.add(new Menu("trails", "Projectile Trails", items));
 
-    public static void openHitEffectGUI(Player player)
-    {
-        Inventory inventory = Bukkit.createInventory(null, 6 * 9, "Hit Effects");
+        /* Hit effects */
+        items.clear(); // being resourceful
 
         for (HitEffect hitEffects : HitEffect.values())
         {
@@ -63,10 +68,25 @@ public class CosmeticManager implements Listener
                 item.setItemMeta(meta);
             }
 
-            inventory.addItem(item);
+            items.add(item);
         }
 
-        player.openInventory(inventory);
+        menus.add(new Menu("hit", "Hit Effects", items));
+    }
+
+    public static void openGUI(Player player, String uid)
+    {
+        for (Menu menu : menus)
+        {
+            if (!menu.getUid().equalsIgnoreCase(uid))
+            {
+                continue;
+            }
+
+            player.openInventory(menu.getInventory());
+        }
+
+        // TODO -- not found message
     }
 
     public static void applyProjectileTrail(Player player, ProjectileTrail projectileTrail)

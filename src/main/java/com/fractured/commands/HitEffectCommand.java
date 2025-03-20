@@ -34,7 +34,7 @@ public class HitEffectCommand
 
         if (args.length == 0)
         {
-            CosmeticManager.openHitEffectGUI(player);
+            CosmeticManager.openGUI(player, "hit");
             return true;
         }
 

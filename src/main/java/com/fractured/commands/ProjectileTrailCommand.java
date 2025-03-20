@@ -36,7 +36,7 @@ public class ProjectileTrailCommand
 
         if (args.length == 0)
         {
-            CosmeticManager.openProjectileTrailGUI(player);
+            CosmeticManager.openGUI(player, "trails");
             return true;
         }
 
